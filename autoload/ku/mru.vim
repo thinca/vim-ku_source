@@ -53,6 +53,7 @@ endfunction
 
 " Append the current buffer to the mru list.
 function! ku#mru#append()  "{{{2
+  call s:load()
   let path = expand('%:p')
   if filereadable(path) && empty(&buftype)
     call insert(filter(s:mru_items, 'v:val.path != path'),
