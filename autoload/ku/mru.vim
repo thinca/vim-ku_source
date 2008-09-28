@@ -45,7 +45,8 @@ function! ku#mru#gather_items(pattern)  "{{{2
     let s:cache_items = map(copy(s:mru_items),'{
           \ "abbr" : fnamemodify(v:val.path, ":~:."),
           \ "word" : v:val.path,
-          \ "menu" : strftime(g:ku_mru_time_format, v:val.time)
+          \ "menu" : strftime(g:ku_mru_time_format, v:val.time),
+          \ "_ku_sort_priority" : -v:val.time
           \}')
   endif
   return s:cache_items
