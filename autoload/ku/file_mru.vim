@@ -87,7 +87,12 @@ endfunction
 
 
 
-function! ku#mru#append()  "{{{2
+
+
+
+
+" Misc  "{{{1
+function! ku#mru#_append()  "{{{2
   " Append the current buffer to the mru list.
   call s:load()
   let path = expand('%:p')
@@ -105,11 +110,6 @@ endfunction
 
 
 
-
-
-
-
-" Misc  "{{{1
 function! s:save()  "{{{2
   call writefile(map(copy(s:mru_files), 'string(v:val)'), g:ku_mru_file)
 endfunction

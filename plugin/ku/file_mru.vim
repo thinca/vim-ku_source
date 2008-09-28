@@ -32,9 +32,9 @@ let g:loaded_ku_mru = 1
 
 augroup plugin-ku-mru
   autocmd!
-  autocmd BufEnter     * call ku#mru#append()
-  autocmd BufWritePost * call ku#mru#append()
-  autocmd BufFilePost  * call ku#mru#append()
+  autocmd BufEnter     * call ku#mru#_append()
+  autocmd BufWritePost * call ku#mru#_append()
+  autocmd BufFilePost  * call ku#mru#_append()
 augroup END
 
 
