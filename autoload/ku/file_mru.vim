@@ -52,6 +52,12 @@ call s:set_default('g:ku_file_mru_limit', 100)
 function! ku#file_mru#event_handler(event, ...)  "{{{2
   if a:event ==# 'SourceEnter'
     call s:load()
+    let s:cached_items = map(copy(s:mru_files), '{
+    \     "abbr": fnamemodify(v:val.path, ":~:."),
+    \     "word": v:val.path,
+    \     "menu": strftime(g:ku_file_mru_time_format, v:val.time),
+    \     "_ku_sort_priority": -v:val.time
+    \   }')
   else
     return call('ku#default_event_handler', [a:event] + a:000)
   endif
@@ -75,14 +81,6 @@ endfunction
 
 
 function! ku#file_mru#gather_items(pattern)  "{{{2
-  if !exists('s:cached_items')
-    let s:cached_items = map(copy(s:mru_files),'{
-          \ "abbr" : fnamemodify(v:val.path, ":~:."),
-          \ "word" : v:val.path,
-          \ "menu" : strftime(g:ku_file_mru_time_format, v:val.time),
-          \ "_ku_sort_priority" : -v:val.time
-          \}')
-  endif
   return s:cached_items
 endfunction
 
@@ -105,7 +103,6 @@ function! ku#file_mru#_append()  "{{{2
       unlet s:mru_files[g:ku_file_mru_limit]
     endif
     call s:save()
-    unlet! s:cached_items
   endif
 endfunction
 
@@ -124,7 +121,6 @@ function! s:load()  "{{{2
     let s:mru_files = filter(map(readfile(g:ku_file_mru_file), 'eval(v:val)'),
       \ 'filereadable(v:val.path)')[0:g:ku_file_mru_limit - 1]
   endif
-  unlet! s:cached_items
 endfunction
 
 
