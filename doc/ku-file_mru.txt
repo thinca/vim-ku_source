@@ -29,6 +29,7 @@ CONTENTS					*ku-file_mru-contents*
 Introduction		|ku-file_mru-introduction|
 Action Table		|ku-file_mru-action-table|
 Key Table		|ku-file_mru-key-table|
+Variables		|ku-file_mru-variables|
 Bugs			|ku-file_mru-bugs|
 Changelog		|ku-file_mru-changelog|
 
@@ -62,6 +63,26 @@ Same as |ku-file|.  See |ku-file-action-table| for the details.
 KEY TABLE					*ku-file_mru-key-table*
 
 Same as |ku-file|.  See |ku-file-key-table| for the details.
+
+
+
+
+==============================================================================
+VARIABLES					*ku-file_mru-variables*
+
+						*g:ku_file_mru_file*
+g:ku_file_mru_file		(default: "~/.vimru")
+	String.  Specify the file to save and to load the information of the
+	most recently used files.
+
+						*g:ku_file_mru_limit*
+g:ku_file_mru_limit		(default: 100)
+	Number.  Specify the maximum number of files to be memoized.
+
+						*g:ku_file_mru_time_format*
+g:ku_file_mru_time_format	(default: "(%x %H:%M:%S)")
+	String.  Specify the format of "menu" value for |complete-items|.
+	See |strftime()| for the details of this value.
 
 
 

@@ -35,9 +35,9 @@ let s:mru_files = []
 " s:cached_items = [item, ...]
 
 
-call s:set_default('g:ku_mru_time_format', '(%x %H:%M:%S)')
-call s:set_default('g:ku_mru_file',  expand('~/.vimru'))
-call s:set_default('g:ku_mru_limit', 100)
+call s:set_default('g:ku_file_mru_time_format', '(%x %H:%M:%S)')
+call s:set_default('g:ku_file_mru_file',  expand('~/.vimru'))
+call s:set_default('g:ku_file_mru_limit', 100)
 
 
 
@@ -77,7 +77,7 @@ function! ku#file_mru#gather_items(pattern)  "{{{2
     let s:cached_items = map(copy(s:mru_files),'{
           \ "abbr" : fnamemodify(v:val.path, ":~:."),
           \ "word" : v:val.path,
-          \ "menu" : strftime(g:ku_mru_time_format, v:val.time),
+          \ "menu" : strftime(g:ku_file_mru_time_format, v:val.time),
           \ "_ku_sort_priority" : -v:val.time
           \}')
   endif
@@ -99,8 +99,8 @@ function! ku#file_mru#_append()  "{{{2
   if filereadable(path) && empty(&buftype)
     call insert(filter(s:mru_files, 'v:val.path != path'),
       \ {'path' : path, 'time' : localtime()} )
-    if 0 < g:ku_mru_limit
-      unlet s:mru_files[g:ku_mru_limit]
+    if 0 < g:ku_file_mru_limit
+      unlet s:mru_files[g:ku_file_mru_limit]
     endif
     call s:save()
     unlet! s:cached_items
@@ -111,16 +111,16 @@ endfunction
 
 
 function! s:save()  "{{{2
-  call writefile(map(copy(s:mru_files), 'string(v:val)'), g:ku_mru_file)
+  call writefile(map(copy(s:mru_files), 'string(v:val)'), g:ku_file_mru_file)
 endfunction
 
 
 
 
 function! s:load()  "{{{2
-  if filereadable(g:ku_mru_file)
-    let s:mru_files = filter(map(readfile(g:ku_mru_file), 'eval(v:val)'),
-      \ 'filereadable(v:val.path)')[0:g:ku_mru_limit - 1]
+  if filereadable(g:ku_file_mru_file)
+    let s:mru_files = filter(map(readfile(g:ku_file_mru_file), 'eval(v:val)'),
+      \ 'filereadable(v:val.path)')[0:g:ku_file_mru_limit - 1]
   endif
   unlet! s:cached_items
 endfunction
