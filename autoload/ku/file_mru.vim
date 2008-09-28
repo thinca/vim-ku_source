@@ -4,7 +4,8 @@
 " License: NYSL <http://www.kmonos.net/nysl/index.en.html>
 " Variables  "{{{1
 
-" s:mru_files = [{'path': full_path, 'time': localtime()}, ...]
+" [ { 'path' : full_path, 'time' : localtime()}, ... ]
+let s:mru_files = []
 
 " s:cached_items = [item, ...]
 
@@ -31,6 +32,7 @@ call s:set_default('g:ku_file_mru_limit', 100)
 " Interface  "{{{1
 function! ku#file_mru#event_handler(event, ...)  "{{{2
   if a:event ==# 'SourceEnter'
+    call s:load()
     let s:cached_items = map(copy(s:mru_files), '{
     \     "abbr": fnamemodify(v:val.path, ":~:."),
     \     "word": v:val.path,
@@ -103,8 +105,6 @@ function! s:load()  "{{{2
       \ 'filereadable(v:val.path)')[0:g:ku_file_mru_limit - 1]
   endif
 endfunction
-
-call s:load()  " To initialize s:mru_files whenever this file is loaded.
 
 
 
