@@ -47,7 +47,7 @@ call s:set_default('g:ku_mru_limit', 100)
 
 
 " Interface  "{{{1
-function! ku#mru#event_handler(event, ...)  "{{{2
+function! ku#file_mru#event_handler(event, ...)  "{{{2
   if a:event ==# 'SourceEnter'
     call s:load()
   else
@@ -58,21 +58,21 @@ endfunction
 
 
 
-function! ku#mru#action_table()  "{{{2
+function! ku#file_mru#action_table()  "{{{2
   return ku#file#action_table()
 endfunction
 
 
 
 
-function! ku#mru#key_table()  "{{{2
+function! ku#file_mru#key_table()  "{{{2
   return ku#file#key_table()
 endfunction
 
 
 
 
-function! ku#mru#gather_items(pattern)  "{{{2
+function! ku#file_mru#gather_items(pattern)  "{{{2
   if !exists('s:cached_items')
     let s:cached_items = map(copy(s:mru_files),'{
           \ "abbr" : fnamemodify(v:val.path, ":~:."),
@@ -92,7 +92,7 @@ endfunction
 
 
 " Misc  "{{{1
-function! ku#mru#_append()  "{{{2
+function! ku#file_mru#_append()  "{{{2
   " Append the current buffer to the mru list.
   call s:load()
   let path = expand('%:p')
