@@ -22,10 +22,10 @@
 "     SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 " }}}
 
-if exists('loaded_ku_mru') || v:version < 700
+if exists('g:loaded_ku_mru') || v:version < 700
   finish
 endif
-let loaded_ku_mru = 1
+let g:loaded_ku_mru = 1
 
 
 
