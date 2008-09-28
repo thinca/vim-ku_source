@@ -59,22 +59,14 @@ endfunction
 
 
 function! ku#mru#action_table()  "{{{2
-  return {
-  \   'default': 'ku#mru#action_open',
-  \   'open!': 'ku#mru#action_open_x',
-  \   'open': 'ku#mru#action_open',
-  \ }
+  return ku#file#action_table()
 endfunction
 
 
 
 
 function! ku#mru#key_table()  "{{{2
-  return {
-  \   "\<C-o>": 'open',
-  \   'O': 'open!',
-  \   'o': 'open',
-  \ }
+  return ku#file#key_table()
 endfunction
 
 
@@ -118,13 +110,6 @@ endfunction
 
 
 " Misc  "{{{1
-function! s:open(bang, item)  "{{{2
-  execute 'edit'.a:bang fnameescape(a:item.word)
-endfunction
-
-
-
-
 function! s:save()  "{{{2
   call writefile(map(copy(s:mru_files), 'string(v:val)'), g:ku_mru_file)
 endfunction
@@ -138,19 +123,6 @@ function! s:load()  "{{{2
       \ 'filereadable(v:val.path)')[0:g:ku_mru_limit - 1]
   endif
   unlet! s:cached_items
-endfunction
-
-
-
-
-" Actions  "{{{2
-function! ku#mru#action_open(item)  "{{{3
-  call s:open('', a:item)
-endfunction
-
-
-function! ku#mru#action_open_x(item)  "{{{3
-  call s:open('!', a:item)
 endfunction
 
 

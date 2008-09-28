@@ -45,6 +45,7 @@ can choose one from many files and do some action to it.
 Requirements:
 - Vim 7.1 or later
 - |ku| 0.1.3 or later (vimscript#2337)
+- |ku-file| (included with |ku| package)
 
 
 
@@ -52,15 +53,7 @@ Requirements:
 ==============================================================================
 ACTION TABLE					*ku-file_mru-action-table*
 
-default						*ku-file_mru-aciton-default*
-			Same as "open".
-
-open						*ku-file_mru-aciton-open*
-			Open the file specified by the selected item in the
-			current window.
-
-open!						*ku-file_mru-aciton-open!*
-			Like "open", but use :edit! to open the selected item.
+Same as |ku-file|.  See |ku-file-action-table| for the details.
 
 
 
@@ -68,11 +61,7 @@ open!						*ku-file_mru-aciton-open!*
 ==============================================================================
 KEY TABLE					*ku-file_mru-key-table*
 
-Key		Action ~
---------	--------
-<C-o>		open		|ku-file_mru-action-open|
-O		open!		|ku-file_mru-action-open!|
-o		open		|ku-file_mru-action-open|
+Same as |ku-file|.  See |ku-file-key-table| for the details.
 
 
 
