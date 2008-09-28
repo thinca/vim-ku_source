@@ -94,16 +94,18 @@ endfunction
 " Misc  "{{{1
 function! ku#file_mru#_append()  "{{{2
   " Append the current buffer to the mru list.
-  call s:load()
   let path = expand('%:p')
-  if filereadable(path) && empty(&buftype)
-    call insert(filter(s:mru_files, 'v:val.path != path'),
-      \ {'path' : path, 'time' : localtime()} )
-    if 0 < g:ku_file_mru_limit
-      unlet s:mru_files[g:ku_file_mru_limit]
-    endif
-    call s:save()
+  if !filereadable(path) || !empty(&l:buftype)
+    return
   endif
+
+  call s:load()
+  call insert(filter(s:mru_files, 'v:val.path !=# path'),
+  \           {'path': path, 'time': localtime()})
+  if 0 < g:ku_file_mru_limit
+    unlet s:mru_files[g:ku_file_mru_limit]
+  endif
+  call s:save()
 endfunction
 
 
