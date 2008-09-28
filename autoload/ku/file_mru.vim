@@ -24,8 +24,8 @@
 " Variables  "{{{1
 
 function! s:set_default(var, val)
-  if !exists(a:var) || type(eval(a:var)) != type(a:val)
-    execute 'let ' . a:var . ' = ' . string(a:val)
+  if !exists(a:var) || type({a:var}) != type(a:val)
+    let {a:var} = a:val
   endif
 endfunction
 
