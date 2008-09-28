@@ -1,4 +1,28 @@
-" Settings  "{{{1
+" ku source: file_mru
+" Version: 0.0.0
+" Copyright (C) 2008 thinca <http://d.hatena.ne.jp/thinca/>
+" License: MIT license  {{{
+"     Permission is hereby granted, free of charge, to any person obtaining
+"     a copy of this software and associated documentation files (the
+"     "Software"), to deal in the Software without restriction, including
+"     without limitation the rights to use, copy, modify, merge, publish,
+"     distribute, sublicense, and/or sell copies of the Software, and to
+"     permit persons to whom the Software is furnished to do so, subject to
+"     the following conditions:
+"
+"     The above copyright notice and this permission notice shall be included
+"     in all copies or substantial portions of the Software.
+"
+"     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+"     OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+"     MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+"     IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+"     CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+"     TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+"     SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+" }}}
+" Variables  "{{{1
+
 function! s:set_default(var, val)
   if !exists(a:var) || type(eval(a:var)) != type(a:val)
     execute 'let ' . a:var . ' = ' . string(a:val)
@@ -15,6 +39,11 @@ call s:set_default('g:ku_mru_limit', 100)
 
 
 
+
+
+
+
+
 " Interface  "{{{1
 function! ku#mru#event_handler(event, ...)  "{{{2
   if a:event ==# 'SourceEnter'
@@ -24,6 +53,9 @@ function! ku#mru#event_handler(event, ...)  "{{{2
   endif
 endfunction
 
+
+
+
 function! ku#mru#action_table()  "{{{2
   return {
   \   'default': 'ku#mru#action_open',
@@ -32,6 +64,9 @@ function! ku#mru#action_table()  "{{{2
   \ }
 endfunction
 
+
+
+
 function! ku#mru#key_table()  "{{{2
   return {
   \   "\<C-o>": 'open',
@@ -39,6 +74,9 @@ function! ku#mru#key_table()  "{{{2
   \   'o': 'open',
   \ }
 endfunction
+
+
+
 
 function! ku#mru#gather_items(pattern)  "{{{2
   if !exists('s:cache_items')
@@ -52,8 +90,11 @@ function! ku#mru#gather_items(pattern)  "{{{2
   return s:cache_items
 endfunction
 
-" Append the current buffer to the mru list.
+
+
+
 function! ku#mru#append()  "{{{2
+  " Append the current buffer to the mru list.
   call s:load()
   let path = expand('%:p')
   if filereadable(path) && empty(&buftype)
@@ -68,14 +109,26 @@ function! ku#mru#append()  "{{{2
 endfunction
 
 
+
+
+
+
+
+
 " Misc  "{{{1
 function! s:open(bang, item)  "{{{2
   execute 'edit'.a:bang fnameescape(a:item.word)
 endfunction
 
+
+
+
 function! s:save()  "{{{2
   call writefile(map(copy(s:mru_items), 'string(v:val)'), g:ku_mru_file)
 endfunction
+
+
+
 
 function! s:load()  "{{{2
   if filereadable(g:ku_mru_file)
@@ -84,6 +137,8 @@ function! s:load()  "{{{2
   endif
   unlet! s:cache_items
 endfunction
+
+
 
 
 " Actions  "{{{2
@@ -95,6 +150,13 @@ endfunction
 function! ku#mru#action_open_x(item)  "{{{3
   call s:open('!', a:item)
 endfunction
+
+
+
+
+
+
+
 
 " __END__  "{{{1
 " vim: foldmethod=marker
