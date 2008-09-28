@@ -23,17 +23,19 @@
 " }}}
 " Variables  "{{{1
 
-function! s:set_default(var, val)
-  if !exists(a:var) || type({a:var}) != type(a:val)
-    let {a:var} = a:val
-  endif
-endfunction
-
 " [ { 'path' : full_path, 'time' : localtime()}, ... ]
 let s:mru_files = []
 
 " s:cached_items = [item, ...]
 
+
+
+
+function! s:set_default(var, val)
+  if !exists(a:var) || type({a:var}) != type(a:val)
+    let {a:var} = a:val
+  endif
+endfunction
 
 call s:set_default('g:ku_file_mru_time_format', '(%x %H:%M:%S)')
 call s:set_default('g:ku_file_mru_file',  expand('~/.vimru'))
