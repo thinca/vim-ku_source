@@ -1,7 +1,8 @@
 " ku source: file_mru
 " Version: 0.0.0
-" Copyright (C) 2008 thinca <http://d.hatena.ne.jp/thinca/>
-" License: NYSL <http://www.kmonos.net/nysl/index.en.html>
+" Author : thinca <http://d.hatena.ne.jp/thinca/>
+" License: Creative Commons Attribution 2.1 Japan License
+"          <http://creativecommons.org/licenses/by/2.1/jp/deed.en>
 " Variables  "{{{1
 
 " [ { 'path' : full_path, 'time' : localtime()}, ... ]
