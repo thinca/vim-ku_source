@@ -8,6 +8,7 @@
 " [ { 'path' : full_path, 'time' : localtime()}, ... ]
 let s:mru_files = []
 
+let s:mru_file_mtime = 0  " the last modified time of the mru file.
 
 
 
@@ -84,6 +85,7 @@ endfunction
 
 function! s:save()  "{{{2
   call writefile(map(copy(s:mru_files), 'string(v:val)'), g:ku_file_mru_file)
+  let s:mru_file_mtime = getftime(g:ku_file_mru_file)
 endfunction
 
 
@@ -91,8 +93,10 @@ endfunction
 
 function! s:load()  "{{{2
   if filereadable(g:ku_file_mru_file)
+  \ && s:mru_file_mtime != getftime(g:ku_file_mru_file)
     let s:mru_files = filter(map(readfile(g:ku_file_mru_file), 'eval(v:val)'),
-      \ 'filereadable(v:val.path)')[0:g:ku_file_mru_limit - 1]
+    \ 'filereadable(v:val.path)')[0:g:ku_file_mru_limit - 1]
+    let s:mru_file_mtime = getftime(g:ku_file_mru_file)
   endif
 endfunction
 
