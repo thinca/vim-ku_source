@@ -1,5 +1,5 @@
 " ku source: file_mru
-" Version: 0.0.0
+" Version: 0.1.0
 " Author : thinca <http://d.hatena.ne.jp/thinca/>
 " License: Creative Commons Attribution 2.1 Japan License
 "          <http://creativecommons.org/licenses/by/2.1/jp/deed.en>
@@ -7,8 +7,6 @@
 
 " [ { 'path' : full_path, 'time' : localtime()}, ... ]
 let s:mru_files = []
-
-" s:cached_items = [item, ...]
 
 
 
@@ -25,45 +23,36 @@ call s:set_default('g:ku_file_mru_limit', 100)
 
 
 
+function! ku#file_mru#available_sources()
+  return ['file_mru']
+endfunction
 
 
 
 
 
 " Interface  "{{{1
-function! ku#file_mru#event_handler(event, ...)  "{{{2
-  if a:event ==# 'SourceEnter'
-    call s:load()
-    let s:cached_items = map(copy(s:mru_files), '{
-    \     "abbr": fnamemodify(v:val.path, ":~:."),
-    \     "word": v:val.path,
-    \     "menu": strftime(g:ku_file_mru_time_format, v:val.time),
-    \     "_ku_sort_priority": -v:val.time
-    \   }')
-  else
-    return call('ku#default_event_handler', [a:event] + a:000)
-  endif
+function! ku#file_mru#action_table(ext)  "{{{2
+  return ku#file#action_table(a:ext)
 endfunction
 
 
 
 
-function! ku#file_mru#action_table()  "{{{2
-  return ku#file#action_table()
+function! ku#file_mru#key_table(ext)  "{{{2
+  return ku#file#key_table(a:ext)
 endfunction
 
 
 
-
-function! ku#file_mru#key_table()  "{{{2
-  return ku#file#key_table()
-endfunction
-
-
-
-
-function! ku#file_mru#gather_items(pattern)  "{{{2
-  return s:cached_items
+function! ku#file_mru#gather_items(ext, pattern)  "{{{2
+  call s:load()
+  return map(copy(s:mru_files), '{
+  \     "abbr": fnamemodify(v:val.path, ":~:."),
+  \     "word": v:val.path,
+  \     "menu": strftime(g:ku_file_mru_time_format, v:val.time),
+  \     "ku__sort_priority": -v:val.time
+  \   }')
 endfunction
 
 
