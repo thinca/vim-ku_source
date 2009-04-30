@@ -36,15 +36,24 @@ Requirements:
 ==============================================================================
 ACTION TABLE					*ku-file_mru-action-table*
 
-Same as |ku-file|.  See |ku-file-action-table| for the details.
+Including the |ku-file|.  See |ku-file-action-table| for the details.
+In addition, You can use followings:
 
+delete						*ku-file_mru-action-delete*
+			Delete the selected item from mru list.
 
 
 
 ==============================================================================
 KEY TABLE					*ku-file_mru-key-table*
 
-Same as |ku-file|.  See |ku-file-key-table| for the details.
+Including the |ku-file|.  See |ku-file-key-table| for the details.
+In addition, the followings are defined:
+
+Key		Action ~
+--------	--------
+<C-d>		delete		|ku-file_mru-action-delete|
+d		delete		|ku-file_mru-action-delete|
 
 
 
@@ -83,6 +92,7 @@ CHANGELOG					*ku-file_mru-changelog*
 0.1.0	2009-04-30
 	- Update for ku 0.2.0.
 	- Do not reload the file when unneeded.
+	- Add an action "delete" to delete the selected item.
 
 0.0.0	2008-08-17T22:18:18+09:00
 	- Initial version.

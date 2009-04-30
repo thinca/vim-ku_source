@@ -34,14 +34,16 @@ endfunction
 
 " Interface  "{{{1
 function! ku#file_mru#action_table(ext)  "{{{2
-  return ku#file#action_table(a:ext)
+  return extend(ku#file#action_table(a:ext),
+  \ {'delete': 'ku#file_mru#action_delete'})
 endfunction
 
 
 
 
 function! ku#file_mru#key_table(ext)  "{{{2
-  return ku#file#key_table(a:ext)
+  return extend(ku#file#key_table(a:ext),
+  \ {"\<C-d>": 'delete', 'd': 'delete'})
 endfunction
 
 
@@ -78,6 +80,21 @@ function! ku#file_mru#_append()  "{{{2
     unlet s:mru_files[g:ku_file_mru_limit]
   endif
   call s:save()
+endfunction
+
+
+
+
+function! ku#file_mru#action_delete(item)
+  let i = 0
+  for _ in s:mru_files
+    if _.path ==# a:item.word
+      unlet! s:mru_files[i]
+      call s:save()
+      return
+    endif
+    let i += 1
+  endfor
 endfunction
 
 
