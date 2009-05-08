@@ -1,5 +1,5 @@
 " ku source: file_mru
-" Version: 0.1.0
+" Version: 0.1.1
 " Author : thinca <http://d.hatena.ne.jp/thinca/>
 " License: Creative Commons Attribution 2.1 Japan License
 "          <http://creativecommons.org/licenses/by/2.1/jp/deed.en>
@@ -34,7 +34,7 @@ endfunction
 
 " Interface  "{{{1
 function! ku#file_mru#action_table(ext)  "{{{2
-  return extend(ku#file#action_table(a:ext),
+  return extend(copy(ku#file#action_table(a:ext)),
   \ {'delete': 'ku#file_mru#action_delete'})
 endfunction
 
@@ -42,7 +42,7 @@ endfunction
 
 
 function! ku#file_mru#key_table(ext)  "{{{2
-  return extend(ku#file#key_table(a:ext),
+  return extend(copy(ku#file#key_table(a:ext)),
   \ {"\<C-d>": 'delete', 'd': 'delete'})
 endfunction
 
