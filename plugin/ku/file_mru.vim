@@ -1,5 +1,5 @@
 " ku source: file_mru
-" Version: 0.0.0
+" Version: 0.1.2
 " Author : thinca <http://d.hatena.ne.jp/thinca/>
 " License: Creative Commons Attribution 2.1 Japan License
 "          <http://creativecommons.org/licenses/by/2.1/jp/deed.en>
@@ -14,9 +14,7 @@ let g:loaded_ku_file_mru = 1
 
 augroup plugin-ku-file_mru
   autocmd!
-  autocmd BufEnter     * call ku#file_mru#_append()
-  autocmd BufWritePost * call ku#file_mru#_append()
-  autocmd BufFilePost  * call ku#file_mru#_append()
+  autocmd BufEnter,BufWritePost,BufFilePost * call ku#file_mru#_append()
 augroup END
 
 
