@@ -12,7 +12,7 @@ let s:mru_file_mtime = 0  " the last modified time of the mru file.
 
 
 
-function! s:set_default(var, val)
+function! s:set_default(var, val)  "{{{2
   if !exists(a:var) || type({a:var}) != type(a:val)
     let {a:var} = a:val
   endif
@@ -24,7 +24,7 @@ call s:set_default('g:ku_file_mru_limit', 100)
 
 
 
-function! ku#file_mru#available_sources()
+function! ku#file_mru#available_sources()  "{{{2
   return ['file_mru']
 endfunction
 
@@ -69,7 +69,7 @@ endfunction
 function! ku#file_mru#_append()  "{{{2
   " Append the current buffer to the mru list.
   let path = expand('%:p')
-  if !filereadable(path) || !empty(&l:buftype)
+  if s:is_exists_path(path) == '' || !empty(&l:buftype)
     return
   endif
 
@@ -85,7 +85,7 @@ endfunction
 
 
 
-function! ku#file_mru#action_delete(item)
+function! ku#file_mru#action_delete(item)  "{{{2
   let i = 0
   for _ in s:mru_files
     if _.path ==# a:item.word
@@ -112,11 +112,17 @@ function! s:load()  "{{{2
   if filereadable(g:ku_file_mru_file)
   \ && s:mru_file_mtime != getftime(g:ku_file_mru_file)
     let s:mru_files = filter(map(readfile(g:ku_file_mru_file), 'eval(v:val)'),
-    \ 'filereadable(v:val.path)')[0:g:ku_file_mru_limit - 1]
+    \ 's:is_exists_path(v:val.path)')[0:g:ku_file_mru_limit - 1]
     let s:mru_file_mtime = getftime(g:ku_file_mru_file)
   endif
 endfunction
 
+
+
+
+function! s:is_exists_path(path)  "{{{2
+  return isdirectory(a:path) || filereadable(a:path)
+endfunction
 
 
 

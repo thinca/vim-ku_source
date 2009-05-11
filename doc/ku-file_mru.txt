@@ -40,7 +40,7 @@ Including the |ku-file|.  See |ku-file-action-table| for the details.
 In addition, You can use followings:
 
 delete						*ku-file_mru-action-delete*
-			Delete the selected item from mru list.
+			Delete the selected item from MRU list.
 
 
 
@@ -89,7 +89,8 @@ BUGS						*ku-file_mru-bugs*
 ==============================================================================
 CHANGELOG					*ku-file_mru-changelog*
 
-0.1.2	2009-05-11
+0.1.2	2009-05-12
+	- Fix to include directories in the MRU list.
 	- Refactor: Define autocmds at a time.
 
 0.1.1	2009-05-09
