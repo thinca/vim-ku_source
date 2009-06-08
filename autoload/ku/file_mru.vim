@@ -1,5 +1,5 @@
 " ku source: file_mru
-" Version: 0.1.2
+" Version: 0.1.3
 " Author : thinca <http://d.hatena.ne.jp/thinca/>
 " License: Creative Commons Attribution 2.1 Japan License
 "          <http://creativecommons.org/licenses/by/2.1/jp/deed.en>
@@ -69,7 +69,7 @@ endfunction
 function! ku#file_mru#_append()  "{{{2
   " Append the current buffer to the mru list.
   let path = expand('%:p')
-  if s:is_exists_path(path) == '' || !empty(&l:buftype)
+  if !s:is_exists_path(path) || &l:buftype != ''
     return
   endif
 
@@ -111,8 +111,8 @@ endfunction
 function! s:load()  "{{{2
   if filereadable(g:ku_file_mru_file)
   \ && s:mru_file_mtime != getftime(g:ku_file_mru_file)
-    let s:mru_files = filter(map(readfile(g:ku_file_mru_file), 'eval(v:val)'),
-    \ 's:is_exists_path(v:val.path)')[0:g:ku_file_mru_limit - 1]
+    let s:mru_files = map(readfile(g:ku_file_mru_file),
+    \ 'eval(v:val)')[0:g:ku_file_mru_limit - 1]
     let s:mru_file_mtime = getftime(g:ku_file_mru_file)
   endif
 endfunction
