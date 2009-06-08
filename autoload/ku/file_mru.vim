@@ -85,6 +85,14 @@ endfunction
 
 
 
+function! ku#file_mru#_sweep()  "{{{2
+  call filter(s:mru_files, 's:is_exists_path(v:val.path)')
+  call s:save()
+endfunction
+
+
+
+
 function! ku#file_mru#action_delete(item)  "{{{2
   let i = 0
   for _ in s:mru_files

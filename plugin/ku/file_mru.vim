@@ -19,6 +19,9 @@ augroup END
 
 
 
+command! -bar KuFilemruSweep call ku#file_mru#_sweep()
+
+
 
 " __END__
 " vim: foldmethod=marker
