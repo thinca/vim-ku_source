@@ -1,6 +1,6 @@
 " ku source: file_mru
 " Version: 0.1.3
-" Author : thinca <http://d.hatena.ne.jp/thinca/>
+" Author : thinca <thinca+vim@gmail.com>
 " License: Creative Commons Attribution 2.1 Japan License
 "          <http://creativecommons.org/licenses/by/2.1/jp/deed.en>
 
