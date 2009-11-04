@@ -24,30 +24,7 @@ call s:set_default('g:ku_source_file_mru_limit', 100)
 
 
 
-function! ku#source#file_mru#available_sources()  "{{{2
-  return ['file_mru']
-endfunction
-
-
-
-
-
 " Interface  "{{{1
-function! ku#source#file_mru#action_table(ext)  "{{{2
-  return extend(copy(ku#file#action_table(a:ext)),
-  \ {'delete': 'ku#source#file_mru#action_delete'})
-endfunction
-
-
-
-
-function! ku#source#file_mru#key_table(ext)  "{{{2
-  return extend(copy(ku#file#key_table(a:ext)),
-  \ {"\<C-d>": 'delete', 'd': 'delete'})
-endfunction
-
-
-
 function! ku#source#file_mru#gather_items(ext, pattern)  "{{{2
   call s:load()
   return map(copy(s:mru_files), '{
@@ -57,10 +34,6 @@ function! ku#source#file_mru#gather_items(ext, pattern)  "{{{2
   \     "ku__sort_priority": -v:val.time
   \   }')
 endfunction
-
-
-
-
 
 
 
