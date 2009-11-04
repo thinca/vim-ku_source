@@ -1,4 +1,4 @@
-*ku-file_mru.txt*	ku source: file_mru
+*ku-source-file_mru.txt*	ku source: file_mru
 
 Version 0.1.3
 Author : thinca <thinca+vim@gmail.com>
@@ -6,24 +6,23 @@ Document written by kana <http://whileimautomaton.net/>
 License: Creative Commons Attribution 2.1 Japan License
          <http://creativecommons.org/licenses/by/2.1/jp/deed.en>
 
-CONTENTS					*ku-file_mru-contents*
+==============================================================================
+CONTENTS					*ku-source-file_mru-contents*
 
-Introduction		|ku-file_mru-introduction|
-Commands		|ku-file_mru-commands|
-Action Table		|ku-file_mru-action-table|
-Key Table		|ku-file_mru-key-table|
-Variables		|ku-file_mru-variables|
-Bugs			|ku-file_mru-bugs|
-Changelog		|ku-file_mru-changelog|
-
-
+INTRODUCTION			|ku-source-file_mru-introduction|
+COMMANDS			|ku-source-file_mru-commands|
+ACTION TABLE			|ku-source-file_mru-action-table|
+KEY TABLE			|ku-source-file_mru-key-table|
+VARIABLES			|ku-source-file_mru-variables|
+BUGS				|ku-source-file_mru-bugs|
+CHANGELOG			|ku-source-file_mru-changelog|
 
 
 ==============================================================================
-INTRODUCTION					*ku-file_mru-introduction*
+INTRODUCTION				*ku-source-file_mru-introduction*
 
-*ku-file_mru* is a source for |ku| to deal with most recently used files.  You
-can choose one from many files and do some action to it.
+*ku-source-file_mru* is a source for |ku| to deal with most recently used
+files.  You can choose one from many files and do some action to it.
 
 
 Requirements:
@@ -35,7 +34,7 @@ Requirements:
 
 
 ==============================================================================
-COMMANDS					*ku-file_mru-commands*
+COMMANDS				*ku-source-file_mru-commands*
 
 :KuFilemruSweep					*:KuFilemruSweep*
 			Sweep the files that do not exist from MRU list.
@@ -43,32 +42,32 @@ COMMANDS					*ku-file_mru-commands*
 
 
 ==============================================================================
-ACTION TABLE					*ku-file_mru-action-table*
+ACTION TABLE				*ku-source-file_mru-action-table*
 
 Including the |ku-file|.  See |ku-file-action-table| for the details.
 In addition, You can use followings:
 
-delete						*ku-file_mru-action-delete*
+delete					*ku-source-file_mru-action-delete*
 			Delete the selected item from MRU list.
 
 
 
 ==============================================================================
-KEY TABLE					*ku-file_mru-key-table*
+KEY TABLE				*ku-source-file_mru-key-table*
 
 Including the |ku-file|.  See |ku-file-key-table| for the details.
 In addition, the followings are defined:
 
 Key		Action ~
 --------	--------
-<C-d>		delete		|ku-file_mru-action-delete|
-d		delete		|ku-file_mru-action-delete|
+<C-d>		delete		|ku-source-file_mru-action-delete|
+d		delete		|ku-source-file_mru-action-delete|
 
 
 
 
 ==============================================================================
-VARIABLES					*ku-file_mru-variables*
+VARIABLES				*ku-source-file_mru-variables*
 
 						*g:ku_file_mru_file*
 g:ku_file_mru_file		(default: "~/.vimru")
@@ -88,7 +87,7 @@ g:ku_file_mru_time_format	(default: "(%x %H:%M:%S)")
 
 
 ==============================================================================
-BUGS						*ku-file_mru-bugs*
+BUGS					*ku-source-file_mru-bugs*
 
 - There are many bugs around the world.
 
@@ -96,7 +95,7 @@ BUGS						*ku-file_mru-bugs*
 
 
 ==============================================================================
-CHANGELOG					*ku-file_mru-changelog*
+CHANGELOG				*ku-source-file_mru-changelog*
 
 0.1.3	2009-06-08
 	- Do not filter the files that not exists on load the MRU list.
