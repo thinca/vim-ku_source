@@ -31,7 +31,7 @@ function! ku#source#file_mru#gather_candidates(args)  "{{{2
   \     "abbr": fnamemodify(v:val.path, ":~:."),
   \     "word": v:val.path,
   \     "menu": strftime(g:ku_source_file_mru_time_format, v:val.time),
-  \     "ku__sort_priority": -v:val.time
+  \     "ku_file_mru_time": v:val.time
   \   }')
 endfunction
 
@@ -39,6 +39,19 @@ endfunction
 
 
 " Misc  "{{{1
+function! ku#source#file_mru#sort(lcandidates, args)
+  return sort(a:lcandidates, 's:compare')
+endfunction
+
+
+
+function! s:compare(candidate_a, candidate_b)
+  return a:candidate_b.ku_file_mru_time - a:candidate_a.ku_file_mru_time
+endfunction
+
+
+
+
 function! ku#source#file_mru#_append()  "{{{2
   " Append the current buffer to the mru list.
   let path = expand('%:p')

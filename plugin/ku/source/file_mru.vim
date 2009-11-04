@@ -19,6 +19,7 @@ call ku#define_source({
 \     'd': 'file_mru/delete',
 \     "\<C-d>": 'file_mru/delete',
 \   },
+\   'sorters': [function('ku#source#file_mru#sort')],
 \   'gather_candidates': function('ku#source#file_mru#gather_candidates'),
 \   'kinds': ['file', 'buffer'],
 \   'name': 'file_mru',
