@@ -24,7 +24,7 @@ call s:set_default('g:ku_source_file_mru_limit', 100)
 
 
 
-" Interface  "{{{1
+" Interface  {{{1
 function! ku#source#file_mru#gather_candidates(args)  "{{{2
   call s:load()
   return map(copy(s:mru_files), '{
@@ -38,7 +38,22 @@ endfunction
 
 
 
-" Misc  "{{{1
+" Actions  {{{1
+function! ku#source#file_mru#action_delete(item)  "{{{2
+  let i = 0
+  for _ in s:mru_files
+    if _.path ==# a:item.word
+      unlet! s:mru_files[i]
+      call s:save()
+      return
+    endif
+    let i += 1
+  endfor
+endfunction
+
+
+
+" Sorters  {{{1
 function! ku#source#file_mru#sort(lcandidates, args)
   return sort(a:lcandidates, 's:compare')
 endfunction
@@ -52,6 +67,7 @@ endfunction
 
 
 
+" Misc  {{{1
 function! ku#source#file_mru#_append()  "{{{2
   " Append the current buffer to the mru list.
   let path = expand('%:p')
@@ -74,21 +90,6 @@ endfunction
 function! ku#source#file_mru#_sweep()  "{{{2
   call filter(s:mru_files, 's:is_exists_path(v:val.path)')
   call s:save()
-endfunction
-
-
-
-
-function! ku#source#file_mru#action_delete(item)  "{{{2
-  let i = 0
-  for _ in s:mru_files
-    if _.path ==# a:item.word
-      unlet! s:mru_files[i]
-      call s:save()
-      return
-    endif
-    let i += 1
-  endfor
 endfunction
 
 
