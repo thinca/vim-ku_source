@@ -12,6 +12,13 @@ let g:loaded_ku_source_file_mru = 1
 
 
 call ku#define_source({
+\   'default_action_table': {
+\     'file_mru/delete': function('ku#source#file_mru#action_delete'),
+\   },
+\   'default_key_table': {
+\     'd': 'file_mru/delete',
+\     "\<C-d>": 'file_mru/delete',
+\   },
 \   'gather_candidates': function('ku#source#file_mru#gather_candidates'),
 \   'kinds': ['file', 'buffer'],
 \   'name': 'file_mru',
