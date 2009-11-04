@@ -12,7 +12,7 @@ let g:loaded_ku_source_file_mru = 1
 
 
 
-augroup plugin-ku-file_mru
+augroup plugin-ku-source-file_mru
   autocmd!
   autocmd BufEnter,BufWritePost,BufFilePost * call ku#source#file_mru#_append()
 augroup END
