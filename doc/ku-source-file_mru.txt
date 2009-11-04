@@ -18,6 +18,7 @@ BUGS				|ku-source-file_mru-bugs|
 CHANGELOG			|ku-source-file_mru-changelog|
 
 
+
 ==============================================================================
 INTRODUCTION				*ku-source-file_mru-introduction*
 
@@ -29,7 +30,6 @@ Requirements:
 - Vim 7.1 or later
 - |ku| 0.2.0 or later (vimscript#2337)
 - |ku-file| (included with |ku| package)
-
 
 
 
@@ -65,24 +65,22 @@ d		delete		|ku-source-file_mru-action-delete|
 
 
 
-
 ==============================================================================
 VARIABLES				*ku-source-file_mru-variables*
 
-						*g:ku_file_mru_file*
-g:ku_file_mru_file		(default: "~/.vimru")
+					*g:ku_source_file_mru_file*
+g:ku_source_file_mru_file		(default: "~/.vimru")
 	String.  Specify the file to save and to load the information of the
 	most recently used files.
 
-						*g:ku_file_mru_limit*
-g:ku_file_mru_limit		(default: 100)
+					*g:ku_source_file_mru_limit*
+g:ku_source_file_mru_limit		(default: 100)
 	Number.  Specify the maximum number of files to be memoized.
 
-						*g:ku_file_mru_time_format*
-g:ku_file_mru_time_format	(default: "(%x %H:%M:%S)")
+					*g:ku_source_file_mru_time_format*
+g:ku_source_file_mru_time_format	(default: "(%x %H:%M:%S)")
 	String.  Specify the format of "menu" value for |complete-items|.
 	See |strftime()| for the details of this value.
-
 
 
 
@@ -90,7 +88,6 @@ g:ku_file_mru_time_format	(default: "(%x %H:%M:%S)")
 BUGS					*ku-source-file_mru-bugs*
 
 - There are many bugs around the world.
-
 
 
 
@@ -116,7 +113,6 @@ CHANGELOG				*ku-source-file_mru-changelog*
 
 0.0.0	2008-08-17T22:18:18+09:00
 	- Initial version.
-
 
 
 

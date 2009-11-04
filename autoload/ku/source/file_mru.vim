@@ -18,9 +18,9 @@ function! s:set_default(var, val)  "{{{2
   endif
 endfunction
 
-call s:set_default('g:ku_file_mru_time_format', '(%x %H:%M:%S)')
-call s:set_default('g:ku_file_mru_file',  expand('~/.vimru'))
-call s:set_default('g:ku_file_mru_limit', 100)
+call s:set_default('g:ku_source_file_mru_time_format', '(%x %H:%M:%S)')
+call s:set_default('g:ku_source_file_mru_file',  expand('~/.vimru'))
+call s:set_default('g:ku_source_file_mru_limit', 100)
 
 
 
@@ -53,7 +53,7 @@ function! ku#file_mru#gather_items(ext, pattern)  "{{{2
   return map(copy(s:mru_files), '{
   \     "abbr": fnamemodify(v:val.path, ":~:."),
   \     "word": v:val.path,
-  \     "menu": strftime(g:ku_file_mru_time_format, v:val.time),
+  \     "menu": strftime(g:ku_source_file_mru_time_format, v:val.time),
   \     "ku__sort_priority": -v:val.time
   \   }')
 endfunction
@@ -76,8 +76,8 @@ function! ku#file_mru#_append()  "{{{2
   call s:load()
   call insert(filter(s:mru_files, 'v:val.path !=# path'),
   \           {'path': path, 'time': localtime()})
-  if 0 < g:ku_file_mru_limit
-    unlet s:mru_files[g:ku_file_mru_limit]
+  if 0 < g:ku_source_file_mru_limit
+    unlet s:mru_files[g:ku_source_file_mru_limit]
   endif
   call s:save()
 endfunction
@@ -109,19 +109,20 @@ endfunction
 
 
 function! s:save()  "{{{2
-  call writefile(map(copy(s:mru_files), 'string(v:val)'), g:ku_file_mru_file)
-  let s:mru_file_mtime = getftime(g:ku_file_mru_file)
+  call writefile(map(copy(s:mru_files), 'string(v:val)'),
+  \              g:ku_source_file_mru_file)
+  let s:mru_file_mtime = getftime(g:ku_source_file_mru_file)
 endfunction
 
 
 
 
 function! s:load()  "{{{2
-  if filereadable(g:ku_file_mru_file)
-  \ && s:mru_file_mtime != getftime(g:ku_file_mru_file)
-    let s:mru_files = map(readfile(g:ku_file_mru_file),
-    \ 'eval(v:val)')[0:g:ku_file_mru_limit - 1]
-    let s:mru_file_mtime = getftime(g:ku_file_mru_file)
+  if filereadable(g:ku_source_file_mru_file)
+  \ && s:mru_file_mtime != getftime(g:ku_source_file_mru_file)
+    let s:mru_files = map(readfile(g:ku_source_file_mru_file),
+    \ 'eval(v:val)')[0:g:ku_source_file_mru_limit - 1]
+    let s:mru_file_mtime = getftime(g:ku_source_file_mru_file)
   endif
 endfunction
 
