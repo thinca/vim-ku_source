@@ -74,7 +74,7 @@ endfunction
 function! ku#source#file_mru#_append()  "{{{2
   " Append the current buffer to the mru list.
   let path = expand('%:p')
-  if &l:buftype != '' || glob(path) == ''
+  if &l:buftype != '' || glob(path, 1) == ''
     return
   endif
 
@@ -84,14 +84,6 @@ function! ku#source#file_mru#_append()  "{{{2
   if 0 < g:ku_source_file_mru_limit
     unlet s:mru_files[g:ku_source_file_mru_limit]
   endif
-  call s:save()
-endfunction
-
-
-
-
-function! ku#source#file_mru#_sweep()  "{{{2
-  call filter(s:mru_files, 'glob(v:val[0]) != ""')
   call s:save()
 endfunction
 
@@ -118,8 +110,9 @@ function! s:load()  "{{{2
       let s:mru_files = []
       return
     endif
-    let s:mru_files = map(s:mru_files[0 : g:ku_source_file_mru_limit - 1],
-    \                     'split(v:val, "\t")')
+    let s:mru_files =
+    \   filter(map(s:mru_files[0 : g:ku_source_file_mru_limit - 1],
+    \              'split(v:val, "\t")'), 'glob(v:val[0], 1) != ""')
     let s:mru_file_mtime = getftime(g:ku_source_file_mru_file)
   endif
 endfunction
