@@ -24,7 +24,7 @@ call s:set_default('g:ku_source_file_mru_limit', 100)
 
 
 
-function! ku#file_mru#available_sources()  "{{{2
+function! ku#source#file_mru#available_sources()  "{{{2
   return ['file_mru']
 endfunction
 
@@ -33,22 +33,22 @@ endfunction
 
 
 " Interface  "{{{1
-function! ku#file_mru#action_table(ext)  "{{{2
+function! ku#source#file_mru#action_table(ext)  "{{{2
   return extend(copy(ku#file#action_table(a:ext)),
-  \ {'delete': 'ku#file_mru#action_delete'})
+  \ {'delete': 'ku#source#file_mru#action_delete'})
 endfunction
 
 
 
 
-function! ku#file_mru#key_table(ext)  "{{{2
+function! ku#source#file_mru#key_table(ext)  "{{{2
   return extend(copy(ku#file#key_table(a:ext)),
   \ {"\<C-d>": 'delete', 'd': 'delete'})
 endfunction
 
 
 
-function! ku#file_mru#gather_items(ext, pattern)  "{{{2
+function! ku#source#file_mru#gather_items(ext, pattern)  "{{{2
   call s:load()
   return map(copy(s:mru_files), '{
   \     "abbr": fnamemodify(v:val.path, ":~:."),
@@ -66,7 +66,7 @@ endfunction
 
 
 " Misc  "{{{1
-function! ku#file_mru#_append()  "{{{2
+function! ku#source#file_mru#_append()  "{{{2
   " Append the current buffer to the mru list.
   let path = expand('%:p')
   if !s:is_exists_path(path) || &l:buftype != ''
@@ -85,7 +85,7 @@ endfunction
 
 
 
-function! ku#file_mru#_sweep()  "{{{2
+function! ku#source#file_mru#_sweep()  "{{{2
   call filter(s:mru_files, 's:is_exists_path(v:val.path)')
   call s:save()
 endfunction
@@ -93,7 +93,7 @@ endfunction
 
 
 
-function! ku#file_mru#action_delete(item)  "{{{2
+function! ku#source#file_mru#action_delete(item)  "{{{2
   let i = 0
   for _ in s:mru_files
     if _.path ==# a:item.word
