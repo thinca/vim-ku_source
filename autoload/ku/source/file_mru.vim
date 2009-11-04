@@ -5,7 +5,10 @@
 "          <http://creativecommons.org/licenses/by/2.1/jp/deed.en>
 " Variables  "{{{1
 
-" [ { 'path' : full_path, 'time' : localtime()}, ... ]
+" The version of MRU file format.
+let s:VERSION = '0.2.0'
+
+" [ [ full_path, time], ... ]
 let s:mru_files = []
 
 let s:mru_file_mtime = 0  " the last modified time of the mru file.
@@ -28,10 +31,10 @@ call s:set_default('g:ku_source_file_mru_limit', 100)
 function! ku#source#file_mru#gather_candidates(args)  "{{{2
   call s:load()
   return map(copy(s:mru_files), '{
-  \     "abbr": fnamemodify(v:val.path, ":~:."),
-  \     "word": v:val.path,
-  \     "menu": strftime(g:ku_source_file_mru_time_format, v:val.time),
-  \     "ku_file_mru_time": v:val.time
+  \     "abbr": fnamemodify(v:val[0], ":~:."),
+  \     "word": v:val[0],
+  \     "menu": strftime(g:ku_source_file_mru_time_format, v:val[1]),
+  \     "ku_file_mru_time": v:val[1]
   \   }')
 endfunction
 
@@ -42,7 +45,7 @@ endfunction
 function! ku#source#file_mru#action_delete(item)  "{{{2
   let i = 0
   for _ in s:mru_files
-    if _.path ==# a:item.word
+    if _[0] ==# a:item.word
       unlet! s:mru_files[i]
       call s:save()
       return
@@ -76,8 +79,8 @@ function! ku#source#file_mru#_append()  "{{{2
   endif
 
   call s:load()
-  call insert(filter(s:mru_files, 'v:val.path !=# path'),
-  \           {'path': path, 'time': localtime()})
+  call insert(filter(s:mru_files, 'v:val[0] !=# path'),
+  \           [path, localtime()])
   if 0 < g:ku_source_file_mru_limit
     unlet s:mru_files[g:ku_source_file_mru_limit]
   endif
@@ -88,7 +91,7 @@ endfunction
 
 
 function! ku#source#file_mru#_sweep()  "{{{2
-  call filter(s:mru_files, 's:is_exists_path(v:val.path)')
+  call filter(s:mru_files, 's:is_exists_path(v:val[0])')
   call s:save()
 endfunction
 
@@ -96,7 +99,7 @@ endfunction
 
 
 function! s:save()  "{{{2
-  call writefile(map(copy(s:mru_files), 'string(v:val)'),
+  call writefile([s:VERSION] + map(copy(s:mru_files), 'join(v:val, "\t")'),
   \              g:ku_source_file_mru_file)
   let s:mru_file_mtime = getftime(g:ku_source_file_mru_file)
 endfunction
@@ -106,9 +109,17 @@ endfunction
 
 function! s:load()  "{{{2
   if filereadable(g:ku_source_file_mru_file)
-  \ && s:mru_file_mtime != getftime(g:ku_source_file_mru_file)
-    let s:mru_files = map(readfile(g:ku_source_file_mru_file),
-    \ 'eval(v:val)')[0:g:ku_source_file_mru_limit - 1]
+  \  && s:mru_file_mtime != getftime(g:ku_source_file_mru_file)
+    let [ver; s:mru_files] = readfile(g:ku_source_file_mru_file)
+    if ver !=# s:VERSION
+      echohl WarningMsg
+      echomsg 'Sorry, the version of MRU file is old.  Clears the MRU list.'
+      echohl None
+      let s:mru_files = []
+      return
+    endif
+    let s:mru_files = map(s:mru_files[0 : g:ku_source_file_mru_limit - 1],
+    \                     'split(v:val, "\t")')
     let s:mru_file_mtime = getftime(g:ku_source_file_mru_file)
   endif
 endfunction
