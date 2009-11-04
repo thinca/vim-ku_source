@@ -4,10 +4,10 @@
 " License: Creative Commons Attribution 2.1 Japan License
 "          <http://creativecommons.org/licenses/by/2.1/jp/deed.en>
 
-if exists('g:loaded_ku_file_mru') || v:version < 700
+if exists('g:loaded_ku_source_file_mru') || v:version < 700
   finish
 endif
-let g:loaded_ku_file_mru = 1
+let g:loaded_ku_source_file_mru = 1
 
 
 
