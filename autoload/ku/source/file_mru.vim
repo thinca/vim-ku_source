@@ -74,7 +74,7 @@ endfunction
 function! ku#source#file_mru#_append()  "{{{2
   " Append the current buffer to the mru list.
   let path = expand('%:p')
-  if !s:is_exists_path(path) || &l:buftype != ''
+  if &l:buftype != '' || glob(path) == ''
     return
   endif
 
@@ -91,7 +91,7 @@ endfunction
 
 
 function! ku#source#file_mru#_sweep()  "{{{2
-  call filter(s:mru_files, 's:is_exists_path(v:val[0])')
+  call filter(s:mru_files, 'glob(v:val[0]) != ""')
   call s:save()
 endfunction
 
@@ -123,15 +123,6 @@ function! s:load()  "{{{2
     let s:mru_file_mtime = getftime(g:ku_source_file_mru_file)
   endif
 endfunction
-
-
-
-
-function! s:is_exists_path(path)  "{{{2
-  return isdirectory(a:path) || filereadable(a:path)
-endfunction
-
-
 
 
 
