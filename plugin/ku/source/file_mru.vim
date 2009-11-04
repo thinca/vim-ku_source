@@ -11,6 +11,13 @@ let g:loaded_ku_source_file_mru = 1
 
 
 
+call ku#define_source({
+\   'gather_candidates': function('ku#source#file_mru#gather_candidates'),
+\   'kinds': ['file', 'buffer'],
+\   'name': 'file_mru',
+\ })
+
+
 
 augroup plugin-ku-source-file_mru
   autocmd!
