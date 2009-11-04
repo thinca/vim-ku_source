@@ -25,7 +25,7 @@ call s:set_default('g:ku_source_file_mru_limit', 100)
 
 
 " Interface  "{{{1
-function! ku#source#file_mru#gather_items(ext, pattern)  "{{{2
+function! ku#source#file_mru#gather_candidates(args)  "{{{2
   call s:load()
   return map(copy(s:mru_files), '{
   \     "abbr": fnamemodify(v:val.path, ":~:."),
