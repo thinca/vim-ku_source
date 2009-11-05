@@ -6,26 +6,26 @@
 
 
 " Interface  "{{{1
-function! ku#cmd_mru#available_sources()
+function! ku#source#cmd_mru#available_sources()
   return ['cmd_mru/cmd', 'cmd_mru/search']
 endfunction
 
 
 
 
-function! ku#cmd_mru#action_table(ext)  "{{{2
+function! ku#source#cmd_mru#action_table(ext)  "{{{2
   return {
-  \ 'default': 'ku#cmd_mru#action_execute',
-  \ 'execute': 'ku#cmd_mru#action_execute',
-  \ 'input': 'ku#cmd_mru#action_input',
-  \ 'delete': 'ku#cmd_mru#action_delete',
+  \ 'default': 'ku#source#cmd_mru#action_execute',
+  \ 'execute': 'ku#source#cmd_mru#action_execute',
+  \ 'input': 'ku#source#cmd_mru#action_input',
+  \ 'delete': 'ku#source#cmd_mru#action_delete',
   \}
 endfunction
 
 
 
 
-function! ku#cmd_mru#key_table(ext)  "{{{2
+function! ku#source#cmd_mru#key_table(ext)  "{{{2
   return {
   \ "\<C-e>": 'execute', 'e': 'execute',
   \ "\<C-i>": 'input', 'i': 'input',
@@ -36,7 +36,7 @@ endfunction
 
 
 
-function! ku#cmd_mru#gather_items(ext, pattern)  "{{{2
+function! ku#source#cmd_mru#gather_items(ext, pattern)  "{{{2
   let _ = []
   let type = a:ext
   let prefix = {'cmd' : ':', 'search' : '/'}[type]
@@ -64,7 +64,7 @@ endfunction
 
 
 " Misc  "{{{1
-function! ku#cmd_mru#action_execute(item) "{{{3
+function! ku#source#cmd_mru#action_execute(item) "{{{3
   let word = a:item.word
   call histadd(word[0], word[1:])
   call feedkeys(word . "\<CR>", 'n')
@@ -73,14 +73,14 @@ endfunction
 
 
 
-function! ku#cmd_mru#action_input(item) "{{{3
+function! ku#source#cmd_mru#action_input(item) "{{{3
   call feedkeys(a:item.word, 'n')
 endfunction
 
 
 
 
-function! ku#cmd_mru#action_delete(item)
+function! ku#source#cmd_mru#action_delete(item)
   call histdel(a:item.word[0], -a:item.ku__sort_priority)
 endfunction
 
