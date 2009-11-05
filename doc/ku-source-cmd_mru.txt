@@ -67,6 +67,9 @@ d		delete		|ku-source-cmd_mru-action-delete|
 ==============================================================================
 CHANGELOG				*ku-source-cmd_mru-changelog*
 
+0.2.0	xxxx-xx-xx
+	- Updated for ku 0.3.0.
+
 0.1.0	2009-05-09
 	- Initial version.
 
