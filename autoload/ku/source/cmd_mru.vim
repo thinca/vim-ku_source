@@ -6,36 +6,6 @@
 
 
 " Interface  "{{{1
-function! ku#source#cmd_mru#available_sources()
-  return ['cmd_mru/cmd', 'cmd_mru/search']
-endfunction
-
-
-
-
-function! ku#source#cmd_mru#action_table(ext)  "{{{2
-  return {
-  \ 'default': 'ku#source#cmd_mru#action_execute',
-  \ 'execute': 'ku#source#cmd_mru#action_execute',
-  \ 'input': 'ku#source#cmd_mru#action_input',
-  \ 'delete': 'ku#source#cmd_mru#action_delete',
-  \}
-endfunction
-
-
-
-
-function! ku#source#cmd_mru#key_table(ext)  "{{{2
-  return {
-  \ "\<C-e>": 'execute', 'e': 'execute',
-  \ "\<C-i>": 'input', 'i': 'input',
-  \ "\<C-d>": 'delete', 'd': 'delete',
-  \}
-endfunction
-
-
-
-
 function! ku#source#cmd_mru#gather_items(ext, pattern)  "{{{2
   let _ = []
   let type = a:ext
@@ -55,10 +25,6 @@ function! ku#source#cmd_mru#gather_items(ext, pattern)  "{{{2
 
   return _
 endfunction
-
-
-
-
 
 
 
@@ -83,10 +49,6 @@ endfunction
 function! ku#source#cmd_mru#action_delete(item)
   call histdel(a:item.word[0], -a:item.ku__sort_priority)
 endfunction
-
-
-
-
 
 
 
