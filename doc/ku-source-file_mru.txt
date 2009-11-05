@@ -25,9 +25,8 @@ files.  You can choose one from many files and do some action to it.
 
 
 Requirements:
-- Vim 7.1 or later
-- |ku| 0.2.0 or later (vimscript#2337)
-- |ku-file| (included with |ku| package)
+- Vim 7.2 or later
+- |ku| 0.3.0 or later (vimscript#2337)
 
 
 
