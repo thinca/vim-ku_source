@@ -6,9 +6,9 @@
 
 
 " Interface  "{{{1
-function! ku#source#cmd_mru#gather_items(ext, pattern)  "{{{2
+function! ku#source#cmd_mru#gather_candidates(args)  "{{{2
   let _ = []
-  let type = a:ext
+  let type = matchstr(a:args.source.name, '^cmd_mru/\zs\w*$')
   let prefix = {'cmd' : ':', 'search' : '/'}[type]
   let max = histnr(type)
   let max_digit = strlen(max)
