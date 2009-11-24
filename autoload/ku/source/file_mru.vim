@@ -71,6 +71,12 @@ endfunction
 
 
 " Misc  {{{1
+function! ku#source#file_mru#valid_for_acc_p(candidate)  "{{{2
+  return 0  " Always invalid.
+endfunction
+
+
+
 function! ku#source#file_mru#_append()  "{{{2
   " Append the current buffer to the mru list.
   let path = expand('%:p')

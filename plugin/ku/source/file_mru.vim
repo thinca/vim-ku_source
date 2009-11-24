@@ -24,6 +24,7 @@ call ku#define_source({
 \   'gather_candidates': function('ku#source#file_mru#gather_candidates'),
 \   'kinds': ['file', 'buffer'],
 \   'name': 'file/mru',
+\   'valid_for_acc_p': function('ku#source#file_mru#valid_for_acc_p'),
 \ })
 
 
