@@ -18,7 +18,7 @@ function! ku#source#cmd_mru#gather_candidates(args)  "{{{2
       call add(_, {
       \ 'word': prefix . cmd,
       \ 'menu': printf('%' . max_digit . 'd%s%s', i, prefix, type),
-      \ 'ku__sort_priority': -i
+      \ 'ku_cmd/mru_index': i
       \ })
     endif
   endfor
@@ -29,7 +29,7 @@ endfunction
 
 
 
-" Misc  "{{{1
+" Actions  "{{{1
 function! ku#source#cmd_mru#action_execute(item) "{{{3
   let word = a:item.word
   call histadd(word[0], word[1:])
@@ -49,6 +49,23 @@ endfunction
 function! ku#source#cmd_mru#action_delete(item)
   call histdel(a:item.word[0], -a:item.ku__sort_priority)
 endfunction
+
+
+
+" Sorters  {{{1
+function! ku#source#cmd_mru#sort(lcandidates, args)
+  return sort(a:lcandidates, 's:compare')
+endfunction
+
+
+
+function! s:compare(candidate_a, candidate_b)
+  return a:candidate_b['ku_cmd/mru_index'] - a:candidate_a['ku_cmd/mru_index']
+endfunction
+
+
+
+
 
 
 

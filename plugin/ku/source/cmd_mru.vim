@@ -30,6 +30,7 @@ function! s:definition(name)
 \     'd': 'delete',
 \     "\<C-d>": 'delete',
 \   },
+\   'sorters': [function('ku#source#cmd_mru#sort')],
 \   'gather_candidates': function('ku#source#cmd_mru#gather_candidates'),
 \   'name': a:name,
 \ }
