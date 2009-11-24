@@ -13,7 +13,6 @@ INTRODUCTION			|ku-source-file_mru-introduction|
 ACTION TABLE			|ku-source-file_mru-action-table|
 KEY TABLE			|ku-source-file_mru-key-table|
 VARIABLES			|ku-source-file_mru-variables|
-BUGS				|ku-source-file_mru-bugs|
 CHANGELOG			|ku-source-file_mru-changelog|
 
 
@@ -70,13 +69,6 @@ g:ku_source_file_mru_limit		(default: 100)
 g:ku_source_file_mru_time_format	(default: "(%x %H:%M:%S)")
 	String.  Specify the format of "menu" value for |complete-items|.
 	See |strftime()| for the details of this value.
-
-
-
-==============================================================================
-BUGS					*ku-source-file_mru-bugs*
-
-- There are many bugs around the world.
 
 
 
