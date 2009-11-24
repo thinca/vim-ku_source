@@ -1,4 +1,4 @@
-*ku-source-cmd_mru.txt*	ku source: cmd_mru
+*ku-source-cmd_mru.txt*	ku source: cmd/mru
 
 Version 0.1.0
 Author : thinca <thinca+vim@gmail.com>
@@ -21,8 +21,8 @@ INTRODUCTION				*ku-source-cmd_mru-introduction*
 commands.  You can choose one from many commands and do some action to it.
 
 This is including two sources as follows.
-- cmd_mru/cmd
-- cmd_mru/search
+- cmd/mru
+- search/mru
 
 NOTE: This source operates the |cmdline-history|.
 
@@ -69,6 +69,7 @@ CHANGELOG				*ku-source-cmd_mru-changelog*
 
 0.2.0	xxxx-xx-xx
 	- Updated for ku 0.3.0.
+	- Renamed the sources name.
 
 0.1.0	2009-05-09
 	- Initial version.

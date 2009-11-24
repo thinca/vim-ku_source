@@ -1,4 +1,4 @@
-" ku source: cmd_mru
+" ku source: cmd/mru
 " Version: 0.1.0
 " Author : thinca <thinca+vim@gmail.com>
 " License: Creative Commons Attribution 2.1 Japan License
@@ -8,7 +8,7 @@
 " Interface  "{{{1
 function! ku#source#cmd_mru#gather_candidates(args)  "{{{2
   let _ = []
-  let type = matchstr(a:args.source.name, '^cmd_mru/\zs\w*$')
+  let type = matchstr(a:args.source.name, '^\w*\ze/mru$')
   let prefix = {'cmd' : ':', 'search' : '/'}[type]
   let max = histnr(type)
   let max_digit = strlen(max)
