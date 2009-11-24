@@ -14,7 +14,8 @@ set cpo&vim
 
 
 
-call ku#define_source({
+function! s:definition(name)
+  return {
 \   'default_action_table': {
 \     'default': function('ku#source#cmd_mru#action_execute'),
 \     'execute': function('ku#source#cmd_mru#action_execute'),
@@ -30,29 +31,14 @@ call ku#define_source({
 \     "\<C-d>": 'delete',
 \   },
 \   'gather_candidates': function('ku#source#cmd_mru#gather_candidates'),
-\   'name': 'cmd/mru',
-\ })
+\   'name': a:name,
+\ }
+endfunction
 
 
 
-call ku#define_source({
-\   'default_action_table': {
-\     'default': function('ku#source#cmd_mru#action_execute'),
-\     'execute': function('ku#source#cmd_mru#action_execute'),
-\     'input':   function('ku#source#cmd_mru#action_input'),
-\     'delete':  function('ku#source#cmd_mru#action_delete'),
-\   },
-\   'default_key_table': {
-\     'e': 'execute',
-\     "\<C-e>": 'execute',
-\     'i': 'input',
-\     "\<C-i>": 'input',
-\     'd': 'delete',
-\     "\<C-d>": 'delete',
-\   },
-\   'gather_candidates': function('ku#source#cmd_mru#gather_candidates'),
-\   'name': 'search/mru',
-\ })
+call ku#define_source(s:definition('cmd/mru'))
+call ku#define_source(s:definition('search/mru'))
 
 
 
