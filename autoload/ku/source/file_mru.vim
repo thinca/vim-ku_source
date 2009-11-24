@@ -1,4 +1,4 @@
-" ku source: file_mru
+" ku source: file/mru
 " Version: 0.1.3
 " Author : thinca <thinca+vim@gmail.com>
 " License: Creative Commons Attribution 2.1 Japan License
@@ -34,7 +34,7 @@ function! ku#source#file_mru#gather_candidates(args)  "{{{2
   \     "abbr": fnamemodify(v:val[0], ":~:."),
   \     "word": v:val[0],
   \     "menu": strftime(g:ku_source_file_mru_time_format, v:val[1]),
-  \     "ku_file_mru_time": v:val[1]
+  \     "ku_file/mru_time": v:val[1]
   \   }')
 endfunction
 
@@ -64,7 +64,7 @@ endfunction
 
 
 function! s:compare(candidate_a, candidate_b)
-  return a:candidate_b.ku_file_mru_time - a:candidate_a.ku_file_mru_time
+  return a:candidate_b['ku_file/mru_time'] - a:candidate_a['ku_file/mru_time']
 endfunction
 
 

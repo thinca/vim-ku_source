@@ -1,4 +1,4 @@
-*ku-source-file_mru.txt*	ku source: file_mru
+*ku-source-file_mru.txt*	ku source: file/mru
 
 Version 0.1.3
 Author : thinca <thinca+vim@gmail.com>
@@ -36,7 +36,7 @@ ACTION TABLE				*ku-source-file_mru-action-table*
 Including the |ku-file|.  See |ku-file-action-table| for the details.
 In addition, You can use followings:
 
-file_mru/delete				*ku-source-file_mru-action-delete*
+file/mru/delete				*ku-source-file_mru-action-delete*
 			Delete the selected item from MRU list.
 
 
@@ -49,8 +49,8 @@ In addition, the followings are defined:
 
 Key		Action ~
 --------	--------
-<C-d>		file_mru/delete		|ku-source-file_mru-action-delete|
-d		file_mru/delete		|ku-source-file_mru-action-delete|
+<C-d>		file/mru/delete		|ku-source-file_mru-action-delete|
+d		file/mru/delete		|ku-source-file_mru-action-delete|
 
 
 
@@ -86,7 +86,7 @@ CHANGELOG				*ku-source-file_mru-changelog*
 0.2.0	xxxx.xx.xx
 	- Updated for ku 0.3.0.
 	  - Changed the variables name of configuration.
-	  - Changed the action name "delete" into "file_mru/delete".
+	  - Changed the action name "delete" into "file/mru/delete".
 	- Changed the MRU file format.  It has no compatibility with older
 	  version.
 	  If you want to use the old MRU file, execute the following command
