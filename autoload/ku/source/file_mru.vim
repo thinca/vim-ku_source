@@ -31,9 +31,9 @@ call s:set_default('g:ku_source_file_mru_limit', 100)
 function! ku#source#file_mru#gather_candidates(args)  "{{{2
   call s:load()
   return map(copy(s:mru_files), '{
-  \     "abbr": fnamemodify(v:val[0], ":~:."),
+  \     "abbr": strftime(g:ku_source_file_mru_time_format, v:val[1]) .
+  \             fnamemodify(v:val[0], ":~:."),
   \     "word": v:val[0],
-  \     "menu": strftime(g:ku_source_file_mru_time_format, v:val[1]),
   \     "ku_file/mru_time": v:val[1]
   \   }')
 endfunction
