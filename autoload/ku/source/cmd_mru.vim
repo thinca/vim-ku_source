@@ -47,7 +47,7 @@ endfunction
 
 
 function! ku#source#cmd_mru#action_delete(item)
-  call histdel(a:item.word[0], -a:item.ku__sort_priority)
+  call histdel(a:item.word[0], a:item['ku_cmd/mru_index'])
 endfunction
 
 
