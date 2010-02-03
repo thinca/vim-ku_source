@@ -21,6 +21,7 @@ endfunction
 call s:set_default('g:ku_file_mru_time_format', '(%x %H:%M:%S)')
 call s:set_default('g:ku_file_mru_file',  expand('~/.vimru'))
 call s:set_default('g:ku_file_mru_limit', 100)
+call s:set_default('g:ku_file_mru_ignore_pattern', '')
 
 
 
@@ -70,6 +71,8 @@ function! ku#file_mru#_append()  "{{{2
   " Append the current buffer to the mru list.
   let path = expand('%:p')
   if !s:is_exists_path(path) || &l:buftype != ''
+  \   || (g:ku_file_mru_ignore_pattern != ''
+  \      && substitute(path, '\\', '/', 'g') =~# g:ku_file_mru_ignore_pattern)
     return
   endif
 

@@ -84,6 +84,12 @@ g:ku_file_mru_time_format	(default: "(%x %H:%M:%S)")
 	String.  Specify the format of "menu" value for |complete-items|.
 	See |strftime()| for the details of this value.
 
+						*g:ku_file_mru_ignore_pattern*
+g:ku_file_mru_ignore_pattern	(default: "")
+	String.  The file that the full path matches to this pattern is not
+	recorded.  This is not used if the value is empty.
+	The path separator is always "/" for portability.
+
 
 
 
@@ -97,6 +103,9 @@ BUGS						*ku-file_mru-bugs*
 
 ==============================================================================
 CHANGELOG					*ku-file_mru-changelog*
+
+0.1.4	2010-02-03
+	- Added |g:ku_file_mru_ignore_pattern| option.
 
 0.1.3	2009-06-08
 	- Do not filter the files that not exists on load the MRU list.
